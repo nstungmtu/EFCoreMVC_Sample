@@ -1,0 +1,65 @@
+﻿@model PaginatedListViewModel<EFCoreMVC.Data.User>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model[0].UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Firstname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Lastname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Role)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role.RoleId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.UserId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.UserId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.UserId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div class="btn-group me-2" role="group">
+    <a class="btn btn-outline-secondary @Model.PrevDisabledAttr" asp-route-pageSize="@Model.PageSize" asp-route-pageIndex="1">First</a>
+    <a class="btn btn-outline-secondary @Model.PrevDisabledAttr" asp-route-pageSize="@Model.PageSize" asp-route-pageIndex="@Model.PrevPageIndex">Prev</a>
+    <a class="btn btn-outline-secondary @Model.NextDisabledAttr" asp-route-pageSize="@Model.PageSize" asp-route-pageIndex="@Model.NextPageIndex">Next</a>
+    <a class="btn btn-outline-secondary @Model.NextDisabledAttr" asp-route-pageSize="@Model.PageSize" asp-route-pageIndex="@Model.TotalPages">Last</a>
+</div>
